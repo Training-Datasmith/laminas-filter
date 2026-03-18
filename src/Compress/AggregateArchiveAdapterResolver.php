@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Laminas\Filter\Compress;
 
+use function array_values;
+
 use Laminas\Filter\Exception\RuntimeException;
+
 use Laminas\Filter\File\FileInformation;
 
-use function array_values;
 use function sprintf;
 
 final readonly class AggregateArchiveAdapterResolver implements ArchiveAdapterResolverInterface

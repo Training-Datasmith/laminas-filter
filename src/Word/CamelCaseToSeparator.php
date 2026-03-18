@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Laminas\Filter\Word;
 
+use function assert;
+use function implode;
+
+use function is_array;
+
 use Laminas\Filter\FilterInterface;
 use Laminas\Filter\ScalarOrArrayFilterCallback;
 
-use function assert;
-use function implode;
-use function is_array;
 use function preg_split;
 
 use const PREG_SPLIT_DELIM_CAPTURE;

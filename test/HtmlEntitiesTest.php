@@ -4,19 +4,22 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter;
 
-use Laminas\Filter\Exception\DomainException;
-use Laminas\Filter\HtmlEntities as HtmlEntitiesFilter;
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\TestCase;
-use stdClass;
-
-use function file_get_contents;
-use function strlen;
-
 use const ENT_COMPAT;
 use const ENT_NOQUOTES;
 use const ENT_QUOTES;
+
+use function file_get_contents;
+
+use Laminas\Filter\Exception\DomainException;
+use Laminas\Filter\HtmlEntities as HtmlEntitiesFilter;
+
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
+
+use PHPUnit\Framework\TestCase;
+use stdClass;
+
+use function strlen;
 
 final class HtmlEntitiesTest extends TestCase
 {

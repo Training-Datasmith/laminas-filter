@@ -6,15 +6,17 @@ namespace Laminas\Filter;
 
 use function array_pop;
 use function assert;
+
+use const DIRECTORY_SEPARATOR;
+
 use function explode;
 use function file_exists;
 use function getcwd;
 use function implode;
 use function is_string;
 use function realpath;
-use function str_starts_with;
 
-use const DIRECTORY_SEPARATOR;
+use function str_starts_with;
 
 /**
  * @psalm-type Options = array{

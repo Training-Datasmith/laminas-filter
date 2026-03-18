@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
-use Laminas\ServiceManager\ServiceManager;
-use Psr\Container\ContainerInterface;
-
 use function is_array;
+
+use Laminas\ServiceManager\ServiceManager;
+
+use Psr\Container\ContainerInterface;
 
 /**
  * @psalm-import-type ServiceManagerConfiguration from ServiceManager

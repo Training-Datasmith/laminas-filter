@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Laminas\Filter\Compress;
 
-use Laminas\Filter\Exception\ExtensionNotLoadedException;
-use Laminas\Filter\Exception\RuntimeException;
-
 use function assert;
 use function extension_loaded;
+
 use function gzcompress;
 use function gzdeflate;
 use function gzinflate;
 use function gzuncompress;
+
+use Laminas\Filter\Exception\ExtensionNotLoadedException;
+use Laminas\Filter\Exception\RuntimeException;
 
 /**
  * Compression adapter for Gzip (ZLib)

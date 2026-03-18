@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace Laminas\Filter\File;
 
-use Laminas\Filter\Exception;
-use Laminas\Filter\FilterInterface;
-
 use function array_is_list;
 use function file_exists;
+
 use function fnmatch;
 use function is_dir;
 use function is_string;
 use function is_writable;
+
+use Laminas\Filter\Exception;
+use Laminas\Filter\FilterInterface;
+
 use function pathinfo;
 use function rename;
 use function sprintf;
@@ -123,7 +125,7 @@ final readonly class Rename implements FilterInterface
             throw new Exception\RuntimeException(
                 sprintf(
                     "File '%s' could not be renamed. "
-                    . "An error occurred while processing the file.",
+                    . 'An error occurred while processing the file.',
                     $sourceFilePath
                 )
             );

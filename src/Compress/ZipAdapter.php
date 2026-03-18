@@ -4,27 +4,33 @@ declare(strict_types=1);
 
 namespace Laminas\Filter\Compress;
 
-use Laminas\Filter\Exception\ExtensionNotLoadedException;
-use Laminas\Filter\Exception\InvalidArgumentException;
-use Laminas\Filter\Exception\RuntimeException;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use SplFileInfo;
-use ZipArchive;
-
 use function assert;
 use function basename;
+
+use const DIRECTORY_SEPARATOR;
+
 use function extension_loaded;
 use function file_put_contents;
 use function is_dir;
 use function is_int;
+
 use function is_string;
+
+use Laminas\Filter\Exception\ExtensionNotLoadedException;
+use Laminas\Filter\Exception\InvalidArgumentException;
+use Laminas\Filter\Exception\RuntimeException;
+
 use function ltrim;
+
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use SplFileInfo;
+
 use function sprintf;
 use function str_replace;
 use function sys_get_temp_dir;
 
-use const DIRECTORY_SEPARATOR;
+use ZipArchive;
 
 final class ZipAdapter implements ArchiveAdapterInterface
 {

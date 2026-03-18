@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
+use function is_dir;
+use function is_writable;
+
 use Laminas\Filter\Compress\AggregateArchiveAdapterResolver;
 use Laminas\Filter\Compress\ArchiveAdapterResolverInterface;
 use Laminas\Filter\Compress\FileExtensionArchiveAdapterResolver;
 use Laminas\Filter\Compress\MimeTypeArchiveAdapterResolver;
 use Laminas\Filter\Exception\InvalidArgumentException;
+
 use Laminas\Filter\Exception\RuntimeException;
 use Laminas\Filter\File\FileInformation;
-
-use function is_dir;
-use function is_writable;
 
 /**
  * @psalm-type Options = array{

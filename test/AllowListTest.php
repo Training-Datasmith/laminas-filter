@@ -5,14 +5,18 @@ declare(strict_types=1);
 namespace LaminasTest\Filter;
 
 use ArrayObject;
+
+use function gettype;
+
 use Laminas\Filter\AllowList as AllowListFilter;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+
+use function sprintf;
+
 use Throwable;
 use TypeError;
 
-use function gettype;
-use function sprintf;
 use function var_export;
 
 final class AllowListTest extends TestCase

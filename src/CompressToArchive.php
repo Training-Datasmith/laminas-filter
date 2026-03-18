@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
+use function is_dir;
+use function is_string;
+
 use Laminas\Filter\Compress\ArchiveAdapterInterface;
 use Laminas\Filter\Compress\TarAdapter;
 use Laminas\Filter\Compress\ZipAdapter;
+
 use Laminas\Filter\Exception\RuntimeException;
 use Laminas\Filter\File\FileInformation;
-
-use function is_dir;
-use function is_string;
 
 /**
  * @psalm-type Options = array{

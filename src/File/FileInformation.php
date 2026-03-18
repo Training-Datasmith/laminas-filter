@@ -4,19 +4,22 @@ declare(strict_types=1);
 
 namespace Laminas\Filter\File;
 
-use finfo;
-use Laminas\Filter\Exception\RuntimeException;
-use Psr\Http\Message\UploadedFileInterface;
-
 use function assert;
 use function basename;
 use function file_exists;
+
+use const FILEINFO_MIME_TYPE;
+
+use finfo;
+
 use function finfo_open;
 use function is_array;
 use function is_readable;
 use function is_string;
 
-use const FILEINFO_MIME_TYPE;
+use Laminas\Filter\Exception\RuntimeException;
+
+use Psr\Http\Message\UploadedFileInterface;
 
 final class FileInformation
 {

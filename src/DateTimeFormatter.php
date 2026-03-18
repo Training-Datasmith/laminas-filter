@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
+use function date_default_timezone_get;
+
 use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
+
+use function is_int;
+
+use function is_string;
+
 use Laminas\Filter\Exception\InvalidArgumentException;
 use Throwable;
-
-use function date_default_timezone_get;
-use function is_int;
-use function is_string;
 
 /**
  * @psalm-type Options = array{

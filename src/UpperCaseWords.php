@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Laminas\Filter;
 
 use function is_string;
-use function mb_convert_case;
 
 use const MB_CASE_TITLE;
+
+use function mb_convert_case;
 
 /**
  * @psalm-type Options = array{encoding?: string}

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter;
 
+use const DIRECTORY_SEPARATOR;
+
 use Laminas\Filter\Exception\InvalidArgumentException;
 use Laminas\Filter\Exception\RuntimeException;
 use Laminas\Filter\FilterInterface;
@@ -14,11 +16,10 @@ use Laminas\Filter\StringToUpper;
 use Laminas\Filter\Word\CamelCaseToDash;
 use Laminas\ServiceManager\ServiceManager;
 use PHPUnit\Framework\Attributes\DataProvider;
+
 use PHPUnit\Framework\TestCase;
 
 use function strtoupper;
-
-use const DIRECTORY_SEPARATOR;
 
 /** @psalm-import-type Options from Inflector */
 final class InflectorTest extends TestCase

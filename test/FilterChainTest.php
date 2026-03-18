@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter;
 
+use function count;
+use function iterator_to_array;
+
 use Laminas\Filter\Exception\InvalidSpecificationArrayException;
 use Laminas\Filter\FilterChain;
 use Laminas\Filter\FilterPluginManager;
@@ -16,11 +19,10 @@ use Laminas\Filter\ToInt;
 use Laminas\ServiceManager\ServiceManager;
 use LaminasTest\Filter\TestAsset\StrRepeatFilterInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
+
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-use function count;
-use function iterator_to_array;
 use function strtolower;
 use function strtoupper;
 use function trim;
@@ -74,7 +76,7 @@ final class FilterChainTest extends TestCase
     public function testAllowsConnectingArbitraryCallbacks(): void
     {
         $chain = new FilterChain($this->plugins);
-        $chain->attach(static fn(string $value): string => strtolower($value));
+        $chain->attach(static fn (string $value): string => strtolower($value));
         $value = 'AbC';
         self::assertSame('abc', $chain->filter($value));
     }
@@ -129,7 +131,7 @@ final class FilterChainTest extends TestCase
                 ['callback' => new StrRepeatFilterInterface()],
                 [
                     'priority' => 10000,
-                    'callback' => static fn(string $value): string => trim($value),
+                    'callback' => static fn (string $value): string => trim($value),
                 ],
             ],
             'filters'   => [

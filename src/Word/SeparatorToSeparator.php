@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Laminas\Filter\Word;
 
+use function assert;
+use function is_string;
+
 use Laminas\Filter\FilterInterface;
 use Laminas\Filter\ScalarOrArrayFilterCallback;
 
-use function assert;
-use function is_string;
 use function preg_quote;
 use function preg_replace;
 

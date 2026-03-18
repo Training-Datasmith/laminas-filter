@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
-use Closure;
-use Stringable;
-
 use function array_map;
+
+use Closure;
+
 use function is_array;
 use function is_scalar;
+
+use Stringable;
 
 /**
  * This class is internal and as such is not subject to any backwards compatibility guarantees.

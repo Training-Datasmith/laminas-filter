@@ -10,11 +10,13 @@ use Laminas\Filter\ToInt;
 use Laminas\Filter\Word\SeparatorToSeparator;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use LaminasTest\Filter\TestAsset\NotAValidFilter;
-use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\TestCase;
-use Throwable;
 
 use function method_exists;
+
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\TestCase;
+
+use Throwable;
 
 final class FilterPluginManagerTest extends TestCase
 {

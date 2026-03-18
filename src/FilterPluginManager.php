@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
+use function array_replace_recursive;
+use function get_debug_type;
+use function is_callable;
+
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
+
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Laminas\ServiceManager\ServiceManager;
 use Psr\Container\ContainerInterface;
 
-use function array_replace_recursive;
-use function get_debug_type;
-use function is_callable;
 use function sprintf;
 
 /**

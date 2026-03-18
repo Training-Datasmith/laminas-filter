@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter;
 
+use function iconv;
+
 use Laminas\Filter\StripTags as StripTagsFilter;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
-use stdClass;
 
-use function iconv;
+use stdClass;
 
 final class StripTagsTest extends TestCase
 {
@@ -292,7 +293,7 @@ final class StripTagsTest extends TestCase
         self::assertSame($expected, $filter($input));
 
         $input  = 'äöü<!-- a comment -->äöü';
-        $input  = iconv("UTF-8", "ISO-8859-1", $input);
+        $input  = iconv('UTF-8', 'ISO-8859-1', $input);
         $output = $filter($input);
         self::assertNotEmpty($output);
     }
@@ -308,7 +309,7 @@ final class StripTagsTest extends TestCase
         self::assertSame($expected, $filter($input));
 
         $input  = 'äöü<!-- a comment -->äöü';
-        $input  = iconv("UTF-8", "ISO-8859-1", $input);
+        $input  = iconv('UTF-8', 'ISO-8859-1', $input);
         $output = $filter($input);
         self::assertNotEmpty($output);
     }
@@ -337,7 +338,7 @@ final class StripTagsTest extends TestCase
     public function testMultiParamArray(): void
     {
         $filter = new StripTagsFilter([
-            'allowTags' => ["a", "b", "hr"],
+            'allowTags' => ['a', 'b', 'hr'],
         ]);
 
         $input    = 'test <a /> test <div>div-content</div>';

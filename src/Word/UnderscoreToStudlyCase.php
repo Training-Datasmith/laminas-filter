@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Laminas\Filter\Word;
 
+use function is_array;
+use function is_scalar;
+
 use Laminas\Filter\FilterInterface;
 use Laminas\Filter\ScalarOrArrayFilterCallback;
 
-use function is_array;
-use function is_scalar;
 use function mb_strlen;
 use function mb_strtolower;
 use function mb_substr;

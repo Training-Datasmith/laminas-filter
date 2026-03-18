@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
-use Laminas\ServiceManager\Factory\FactoryInterface;
-use Psr\Container\ContainerInterface;
-
 use function assert;
+
+use Laminas\ServiceManager\Factory\FactoryInterface;
+
+use Psr\Container\ContainerInterface;
 
 /** @psalm-import-type Options from Inflector */
 final class InflectorFactory implements FactoryInterface

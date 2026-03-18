@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
-use Traversable;
-
 use function array_values;
+
 use function in_array;
 use function iterator_to_array;
+
+use Traversable;
 
 /**
  * @psalm-type Options = array{

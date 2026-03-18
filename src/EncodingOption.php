@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
+use function array_map;
+
+use function in_array;
+
 use Laminas\Filter\Exception\InvalidArgumentException;
 
-use function array_map;
-use function in_array;
 use function mb_internal_encoding;
 use function mb_list_encodings;
 use function sprintf;

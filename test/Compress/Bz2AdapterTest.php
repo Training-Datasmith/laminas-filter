@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter\Compress;
 
+use function array_map;
+use function extension_loaded;
+
 use Laminas\Filter\Compress\Bz2Adapter;
 use Laminas\Filter\Exception\RuntimeException;
 use PHPUnit\Framework\Attributes\DataProvider;
+
 use PHPUnit\Framework\Attributes\RequiresPhp;
 use PHPUnit\Framework\TestCase;
 
-use function array_map;
-use function extension_loaded;
 use function range;
 
 final class Bz2AdapterTest extends TestCase

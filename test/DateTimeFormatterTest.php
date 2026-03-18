@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter;
 
+use function date_default_timezone_get;
+use function date_default_timezone_set;
+
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
@@ -11,11 +14,9 @@ use DateTimeZone;
 use Laminas\Filter\DateTimeFormatter;
 use Laminas\Filter\Exception;
 use PHPUnit\Framework\Attributes\DataProvider;
+
 use PHPUnit\Framework\TestCase;
 use stdClass;
-
-use function date_default_timezone_get;
-use function date_default_timezone_set;
 
 final class DateTimeFormatterTest extends TestCase
 {

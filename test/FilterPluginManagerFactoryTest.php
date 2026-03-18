@@ -33,7 +33,7 @@ final class FilterPluginManagerFactoryTest extends TestCase
                 ],
                 'factories' => [
                     Boolean::class => InvokableFactory::class,
-                    'test-too'     => static fn(): MockObject&FilterInterface => $filter,
+                    'test-too'     => static fn (): MockObject&FilterInterface => $filter,
                 ],
             ],
         ];

@@ -4,17 +4,21 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter\File;
 
-use Laminas\Filter\Exception\InvalidArgumentException;
-use Laminas\Filter\File\LowerCase as FileLowerCase;
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\TestCase;
-use stdClass;
-
 use function copy;
 use function dirname;
 use function file_exists;
 use function file_get_contents;
+
+use Laminas\Filter\Exception\InvalidArgumentException;
+
+use Laminas\Filter\File\LowerCase as FileLowerCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
+
 use function sprintf;
+
+use stdClass;
+
 use function sys_get_temp_dir;
 use function uniqid;
 use function unlink;

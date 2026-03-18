@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Laminas\Filter\File;
 
+use function file_exists;
+use function file_get_contents;
+use function file_put_contents;
+
+use function is_writable;
+
 use Laminas\Filter\Exception\InvalidArgumentException;
 use Laminas\Filter\Exception\RuntimeException;
 use Laminas\Filter\FilterInterface;
 
-use function file_exists;
-use function file_get_contents;
-use function file_put_contents;
-use function is_writable;
 use function sprintf;
 
 /** @internal */

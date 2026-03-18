@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
+use function is_string;
+
 use Laminas\Filter\Exception\InvalidArgumentException;
 
-use function is_string;
 use function ltrim;
 use function parse_url;
 use function preg_match;

@@ -4,7 +4,13 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter;
 
+use function assert;
+use function class_exists;
+
 use Generator;
+
+use function in_array;
+
 use Laminas\Filter\Callback;
 use Laminas\Filter\DataUnitFormatter;
 use Laminas\Filter\FilterPluginManager;
@@ -13,13 +19,10 @@ use Laminas\Filter\PregReplace;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+
 use ReflectionClass;
 use stdClass;
 use Throwable;
-
-use function assert;
-use function class_exists;
-use function in_array;
 
 final class FilterPluginManagerCompatibilityTest extends TestCase
 {
@@ -76,7 +79,7 @@ final class FilterPluginManagerCompatibilityTest extends TestCase
         $manager = self::getPluginManager();
         $manager->configure([
             'factories' => [
-                'test' => static fn(): stdClass => new stdClass(),
+                'test' => static fn (): stdClass => new stdClass(),
             ],
         ]);
         $this->expectException($this->getServiceNotFoundException());

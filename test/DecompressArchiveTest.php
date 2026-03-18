@@ -4,19 +4,24 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter;
 
+use const DIRECTORY_SEPARATOR;
+
+use function filesize;
+
 use Laminas\Diactoros\UploadedFile;
 use Laminas\Filter\DecompressArchive;
 use Laminas\Filter\Exception\InvalidArgumentException;
 use LaminasTest\Filter\Compress\TmpDirectory;
+
+use function mkdir;
+
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-use function filesize;
-use function mkdir;
 use function sys_get_temp_dir;
+
 use function uniqid;
 
-use const DIRECTORY_SEPARATOR;
 use const UPLOAD_ERR_OK;
 
 final class DecompressArchiveTest extends TestCase

@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Laminas\Filter\Compress;
 
-use Laminas\Filter\Exception\ExtensionNotLoadedException;
-use Laminas\Filter\Exception\RuntimeException;
-
 use function assert;
 use function bzcompress;
+
 use function bzdecompress;
 use function extension_loaded;
 use function is_int;
+
+use Laminas\Filter\Exception\ExtensionNotLoadedException;
+use Laminas\Filter\Exception\RuntimeException;
+
 use function sprintf;
 
 /**

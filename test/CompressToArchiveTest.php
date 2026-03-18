@@ -4,19 +4,23 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter;
 
+use function file_get_contents;
+use function filesize;
+use function is_dir;
+
 use Laminas\Diactoros\UploadedFile;
 use Laminas\Filter\Compress\TarAdapter;
 use Laminas\Filter\Compress\ZipAdapter;
 use Laminas\Filter\CompressToArchive;
 use Laminas\Filter\Exception\RuntimeException;
+
 use LaminasTest\Filter\Compress\TmpDirectory;
+
+use function mkdir;
+
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-use function file_get_contents;
-use function filesize;
-use function is_dir;
-use function mkdir;
 use function sys_get_temp_dir;
 
 use const UPLOAD_ERR_OK;

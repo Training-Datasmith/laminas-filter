@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
+use function floor;
+
+use function is_numeric;
+
 use Laminas\Filter\Exception\InvalidArgumentException;
 
-use function floor;
-use function is_numeric;
 use function log;
 use function number_format;
 use function sprintf;

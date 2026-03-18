@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
-use Laminas\Filter\Exception\InvalidArgumentException;
-
 use function array_keys;
+
 use function array_map;
 use function array_values;
 use function assert;
@@ -15,6 +14,9 @@ use function is_array;
 use function is_object;
 use function is_scalar;
 use function is_string;
+
+use Laminas\Filter\Exception\InvalidArgumentException;
+
 use function ltrim;
 use function preg_match;
 use function preg_quote;
@@ -84,7 +86,7 @@ final readonly class Inflector implements FilterInterface
             $name = ltrim($spec, ':');
             if (str_starts_with($spec, ':')) {
                 $resolved[$name] = array_map(
-                    fn(string|FilterInterface|callable $filter): FilterInterface|callable => $this->loadFilter($filter),
+                    fn (string|FilterInterface|callable $filter): FilterInterface|callable => $this->loadFilter($filter),
                     is_string($ruleSet) ? [$ruleSet] : $ruleSet,
                 );
             } else {

@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter;
 
+use function get_debug_type;
+
 use Laminas\Filter\Digits as DigitsFilter;
+
+use const PHP_INT_MAX;
+
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-use function get_debug_type;
 use function sprintf;
-
-use const PHP_INT_MAX;
 
 final class DigitsTest extends TestCase
 {

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter\TestAsset;
 
+use function is_string;
+
 use Laminas\Filter\FilterInterface;
 
-use function is_string;
 use function preg_replace;
 
 /** @implements FilterInterface<string> */

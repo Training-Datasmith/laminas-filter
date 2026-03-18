@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace Laminas\Filter;
 
 use function assert;
+
+use const ENT_QUOTES;
+
 use function function_exists;
 use function htmlentities;
 use function iconv;
 use function is_string;
-use function strlen;
 
-use const ENT_QUOTES;
+use function strlen;
 
 /**
  * @psalm-type Options = array{

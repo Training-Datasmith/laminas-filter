@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
+use function is_string;
+
 use Laminas\Filter\Compress\Bz2Adapter;
 use Laminas\Filter\Compress\GzAdapter;
+
 use Laminas\Filter\Compress\StringCompressionAdapterInterface;
 
-use function is_string;
 use function strtolower;
 
 /**

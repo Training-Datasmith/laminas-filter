@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter;
 
+use function dirname;
+use function getcwd;
+
 use Laminas\Filter\RealPath as RealPathFilter;
+
+use const PHP_OS;
+
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-use function dirname;
-use function getcwd;
 use function str_contains;
-
-use const PHP_OS;
 
 final class RealPathTest extends TestCase
 {

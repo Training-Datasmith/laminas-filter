@@ -6,10 +6,12 @@ namespace LaminasTest\Filter;
 
 use Generator;
 use Laminas\Filter\Callback as CallbackFilter;
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertSame;
+
+use PHPUnit\Framework\Attributes\DataProvider;
+
+use PHPUnit\Framework\TestCase;
 
 final class CallbackTest extends TestCase
 {
@@ -17,8 +19,7 @@ final class CallbackTest extends TestCase
     public static function callbackProvider(): Generator
     {
         yield 'Invokable Class' => [
-            new class ()
-            {
+            new class () {
                 public function __invoke(mixed $input): string
                 {
                     assertSame('INPUT', $input);
@@ -38,8 +39,7 @@ final class CallbackTest extends TestCase
             [self::class, 'staticMethodTest'],
         ];
 
-        $instance = new class
-        {
+        $instance = new class () {
             public function doStuff(mixed $input): string
             {
                 assertSame('INPUT', $input);
@@ -77,8 +77,7 @@ final class CallbackTest extends TestCase
     public static function callbackWithArgumentsProvider(): Generator
     {
         yield 'Invokable Class' => [
-            new class ()
-            {
+            new class () {
                 public function __invoke(mixed $input, int $a, int $b): int
                 {
                     assertSame('INPUT', $input);
@@ -100,8 +99,7 @@ final class CallbackTest extends TestCase
             [self::class, 'staticMethodWithArgumentsTest'],
         ];
 
-        $instance = new class
-        {
+        $instance = new class () {
             public function doStuff(mixed $input, int $a, int $b): int
             {
                 assertSame('INPUT', $input);

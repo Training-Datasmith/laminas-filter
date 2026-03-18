@@ -4,19 +4,22 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter\Compress;
 
+use const E_WARNING;
+
+use function extension_loaded;
+
 use Laminas\Filter\Compress\GzAdapter;
 use Laminas\Filter\Exception\RuntimeException;
 use PHPUnit\Framework\Attributes\DataProvider;
+
 use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
 
-use function extension_loaded;
 use function range;
 use function restore_error_handler;
 use function set_error_handler;
-use function sprintf;
 
-use const E_WARNING;
+use function sprintf;
 
 final class GzAdapterTest extends TestCase
 {

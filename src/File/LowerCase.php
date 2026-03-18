@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Laminas\Filter\File;
 
+use function is_array;
+use function is_string;
+
 use Laminas\Filter\EncodingOption;
 use Laminas\Filter\Exception\InvalidArgumentException;
 use Laminas\Filter\Exception\RuntimeException;
+
 use Laminas\Filter\FilterInterface;
 use Laminas\Filter\StringToLower;
-
-use function is_array;
-use function is_string;
 
 /**
  * @psalm-type Options = array{encoding?: string}

@@ -67,8 +67,7 @@ final class StringCompressionTest extends TestCase
 
     public function testCustomAdapterCanBeUsed(): void
     {
-        $adapter = new class implements StringCompressionAdapterInterface
-        {
+        $adapter = new class () implements StringCompressionAdapterInterface {
             public function compress(string $value): string
             {
                 return 'Fozzie Bear';

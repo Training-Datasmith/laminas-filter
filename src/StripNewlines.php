@@ -18,7 +18,7 @@ final class StripNewlines implements FilterInterface
     {
         return ScalarOrArrayFilterCallback::applyRecursively(
             $value,
-            static fn(string $value): string => str_replace(["\n", "\r"], '', $value),
+            static fn (string $value): string => str_replace(["\n", "\r"], '', $value),
         );
     }
 

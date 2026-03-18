@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter;
 
+use function assert;
+use function is_string;
+
 use Laminas\Filter\StringTrim;
+
+use function mb_chr;
+
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-use function assert;
-use function is_string;
-use function mb_chr;
 use function str_repeat;
 
 final class StringTrimTest extends TestCase

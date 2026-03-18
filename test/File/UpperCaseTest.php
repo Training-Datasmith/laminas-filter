@@ -4,22 +4,27 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter\File;
 
+use function copy;
+
+use const DIRECTORY_SEPARATOR;
+
+use function dirname;
+use function file_exists;
+use function file_get_contents;
+
 use Laminas\Filter\Exception\InvalidArgumentException;
 use Laminas\Filter\File\UpperCase as FileUpperCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+
+use function sprintf;
+
 use stdClass;
 
-use function copy;
-use function dirname;
-use function file_exists;
-use function file_get_contents;
-use function sprintf;
 use function sys_get_temp_dir;
 use function uniqid;
-use function unlink;
 
-use const DIRECTORY_SEPARATOR;
+use function unlink;
 
 final class UpperCaseTest extends TestCase
 {

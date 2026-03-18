@@ -4,28 +4,35 @@ declare(strict_types=1);
 
 namespace Laminas\Filter\File;
 
-use Laminas\Filter\Exception\InvalidArgumentException;
-use Laminas\Filter\Exception\RuntimeException;
-use Laminas\Filter\FilterInterface;
-use Throwable;
-
 use function array_pop;
 use function basename;
+
+use const DIRECTORY_SEPARATOR;
+
 use function dirname;
+
 use function explode;
 use function file_exists;
 use function implode;
 use function is_dir;
+
+use Laminas\Filter\Exception\InvalidArgumentException;
+use Laminas\Filter\Exception\RuntimeException;
+use Laminas\Filter\FilterInterface;
+
 use function pathinfo;
+
+use const PATHINFO_DIRNAME;
+use const PATHINFO_EXTENSION;
+
 use function sprintf;
 use function str_contains;
 use function str_ends_with;
+
+use Throwable;
+
 use function uniqid;
 use function unlink;
-
-use const DIRECTORY_SEPARATOR;
-use const PATHINFO_DIRNAME;
-use const PATHINFO_EXTENSION;
 
 /**
  * @psalm-type Options = array{

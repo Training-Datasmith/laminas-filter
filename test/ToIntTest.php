@@ -4,17 +4,20 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter;
 
+use const E_WARNING;
+
 use Laminas\Filter\ToInt;
 use LaminasTest\Filter\TestAsset\StringableObject;
+
+use const PHP_INT_MAX;
+
 use PHPUnit\Framework\Attributes\DataProvider;
+
 use PHPUnit\Framework\Attributes\RequiresPhp;
 use PHPUnit\Framework\TestCase;
 
 use function restore_error_handler;
 use function set_error_handler;
-
-use const E_WARNING;
-use const PHP_INT_MAX;
 
 final class ToIntTest extends TestCase
 {

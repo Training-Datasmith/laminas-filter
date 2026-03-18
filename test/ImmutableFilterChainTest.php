@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter;
 
+use function implode;
+
 use Laminas\Filter\FilterPluginManager;
 use Laminas\Filter\ImmutableFilterChain;
 use Laminas\Filter\StringPrefix;
 use Laminas\Filter\StringToLower;
 use Laminas\Filter\StringTrim;
 use Laminas\ServiceManager\ServiceManager;
+
 use PHPUnit\Framework\TestCase;
 
-use function implode;
 use function str_replace;
 use function str_split;
 use function strrev;

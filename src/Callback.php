@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
+use function array_unshift;
+
 use Closure;
 
-use function array_unshift;
 use function is_callable;
 
 /**

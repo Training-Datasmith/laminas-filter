@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
-use BackedEnum;
-use UnitEnum;
-
 use function assert;
+
+use BackedEnum;
+
 use function constant;
 use function defined;
 use function is_a;
 use function is_int;
 use function is_string;
+
+use UnitEnum;
 
 /**
  * @psalm-type Options = array{

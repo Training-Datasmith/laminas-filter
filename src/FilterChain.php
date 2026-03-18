@@ -4,18 +4,20 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
+use function count;
+
 use Countable;
+
+use function is_array;
+use function is_callable;
+use function is_int;
+use function is_string;
+
 use IteratorAggregate;
 use Laminas\Filter\Exception\InvalidSpecificationArrayException;
 use Laminas\Stdlib\PriorityQueue;
 use Psr\Container\ContainerExceptionInterface;
 use Traversable;
-
-use function count;
-use function is_array;
-use function is_callable;
-use function is_int;
-use function is_string;
 
 /**
  * @psalm-type InstanceType = FilterInterface|(callable(mixed): mixed)

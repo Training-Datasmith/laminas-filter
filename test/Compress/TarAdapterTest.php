@@ -5,17 +5,23 @@ declare(strict_types=1);
 namespace LaminasTest\Filter\Compress;
 
 use Archive_Tar;
-use InvalidArgumentException;
-use Laminas\Filter\Compress\TarAdapter;
-use Laminas\Filter\Exception\RuntimeException;
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\TestCase;
 
 use function chmod;
 use function class_exists;
 use function file_get_contents;
+
+use InvalidArgumentException;
+
 use function is_dir;
+
+use Laminas\Filter\Compress\TarAdapter;
+use Laminas\Filter\Exception\RuntimeException;
+
 use function mkdir;
+
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
+
 use function sprintf;
 use function trim;
 

@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter\File;
 
+use function chmod;
+use function filesize;
+
 use Laminas\Diactoros\UploadedFile;
 use Laminas\Filter\File\FileInformation;
+
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-use function chmod;
-use function filesize;
 use function touch;
 use function unlink;
 

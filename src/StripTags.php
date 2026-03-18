@@ -10,6 +10,9 @@ use function array_fill;
 use function array_is_list;
 use function array_map;
 use function array_merge;
+
+use const CASE_LOWER;
+
 use function count;
 use function in_array;
 use function is_scalar;
@@ -22,9 +25,8 @@ use function strlen;
 use function strpos;
 use function strtolower;
 use function substr;
-use function trim;
 
-use const CASE_LOWER;
+use function trim;
 
 /**
  * @psalm-type Options = array{

@@ -4,26 +4,36 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter\File;
 
+use function copy;
+
+use const DIRECTORY_SEPARATOR;
+
+use function file_exists;
+
 use Laminas\Filter\Exception\InvalidArgumentException;
 use Laminas\Filter\File\Rename as FileRename;
 use LaminasTest\Filter\Compress\TmpDirectory;
+
+use function mkdir;
+
 use Override;
+
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use stdClass;
-use Throwable;
 
-use function copy;
-use function file_exists;
-use function mkdir;
 use function preg_quote;
 use function rmdir;
 use function sprintf;
-use function sys_get_temp_dir;
-use function uniqid;
-use function unlink;
 
-use const DIRECTORY_SEPARATOR;
+use stdClass;
+
+use function sys_get_temp_dir;
+
+use Throwable;
+
+use function uniqid;
+
+use function unlink;
 
 /**
  * @psalm-import-type Options from FileRename

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Laminas\Filter\Word;
 
+use function assert;
+
 use Laminas\Filter\FilterInterface;
+
 use Laminas\Filter\ScalarOrArrayFilterCallback;
 
-use function assert;
 use function mb_strtoupper;
 use function preg_quote;
 use function preg_replace_callback;
@@ -38,8 +40,8 @@ final readonly class SeparatorToCamelCase implements FilterInterface
             '#(^\P{Z}{1})#u',
         ];
         $replacements = [
-            static fn(array $matches): string => mb_strtoupper((string) $matches[2], 'UTF-8'),
-            static fn(array $matches): string => mb_strtoupper((string) $matches[1], 'UTF-8'),
+            static fn (array $matches): string => mb_strtoupper((string) $matches[2], 'UTF-8'),
+            static fn (array $matches): string => mb_strtoupper((string) $matches[1], 'UTF-8'),
         ];
 
         return ScalarOrArrayFilterCallback::applyRecursively(

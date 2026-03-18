@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter;
 
+use function gettype;
+
 use Laminas\Filter\Boolean;
 use Laminas\Filter\Exception;
 use PHPUnit\Framework\Attributes\DataProvider;
+
 use PHPUnit\Framework\TestCase;
 
-use function gettype;
 use function sprintf;
 use function var_export;
 

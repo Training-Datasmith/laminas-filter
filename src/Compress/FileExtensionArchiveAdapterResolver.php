@@ -4,16 +4,20 @@ declare(strict_types=1);
 
 namespace Laminas\Filter\Compress;
 
+use function basename;
+
 use Laminas\Filter\Exception\RuntimeException;
+
 use Laminas\Filter\File\FileInformation;
 
-use function basename;
 use function pathinfo;
-use function sprintf;
-use function str_ends_with;
-use function strtolower;
 
 use const PATHINFO_EXTENSION;
+
+use function sprintf;
+use function str_ends_with;
+
+use function strtolower;
 
 final class FileExtensionArchiveAdapterResolver implements ArchiveAdapterResolverInterface
 {

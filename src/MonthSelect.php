@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
+use const FILTER_VALIDATE_INT;
+
 use function filter_var;
 use function is_array;
 use function is_numeric;
-use function sprintf;
 
-use const FILTER_VALIDATE_INT;
+use function sprintf;
 
 /**
  * @psalm-type Options = array{

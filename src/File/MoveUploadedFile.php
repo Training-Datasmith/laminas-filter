@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Laminas\Filter\File;
 
 use ErrorException;
-use Laminas\Filter\Exception\InvalidArgumentException;
 
 use function is_uploaded_file;
+
+use Laminas\Filter\Exception\InvalidArgumentException;
+
 use function move_uploaded_file;
 use function restore_error_handler;
 use function set_error_handler;

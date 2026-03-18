@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Laminas\Filter;
 
-use Laminas\Filter\Exception\InvalidArgumentException;
-
 use function array_search;
+
 use function is_int;
 use function is_string;
+
+use Laminas\Filter\Exception\InvalidArgumentException;
+
 use function sprintf;
 
 /**

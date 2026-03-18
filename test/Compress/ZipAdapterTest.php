@@ -4,24 +4,29 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter\Compress;
 
-use Laminas\Filter\Compress\ZipAdapter;
-use Laminas\Filter\Exception\InvalidArgumentException;
-use Laminas\Filter\Exception\RuntimeException;
-use PHPUnit\Framework\Attributes\WithoutErrorHandler;
-use PHPUnit\Framework\TestCase;
-
 use function chmod;
-use function extension_loaded;
-use function file_get_contents;
-use function mkdir;
-use function restore_error_handler;
-use function set_error_handler;
-use function sprintf;
-use function sys_get_temp_dir;
-use function uniqid;
 
 use const DIRECTORY_SEPARATOR;
 use const E_WARNING;
+
+use function extension_loaded;
+use function file_get_contents;
+
+use Laminas\Filter\Compress\ZipAdapter;
+use Laminas\Filter\Exception\InvalidArgumentException;
+use Laminas\Filter\Exception\RuntimeException;
+
+use function mkdir;
+
+use PHPUnit\Framework\Attributes\WithoutErrorHandler;
+use PHPUnit\Framework\TestCase;
+
+use function restore_error_handler;
+use function set_error_handler;
+use function sprintf;
+
+use function sys_get_temp_dir;
+use function uniqid;
 
 final class ZipAdapterTest extends TestCase
 {

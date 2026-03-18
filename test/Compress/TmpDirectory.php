@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter\Compress;
 
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use SplFileInfo;
-
 use function assert;
 use function is_dir;
 use function is_string;
+
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+
 use function rmdir;
+
+use SplFileInfo;
+
 use function unlink;
 
 final class TmpDirectory
