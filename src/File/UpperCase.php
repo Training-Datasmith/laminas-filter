@@ -17,9 +17,9 @@ use function is_string;
  * @psalm-type Options = array{encoding?: string}
  * @implements FilterInterface<mixed>
  */
-final class UpperCase implements FilterInterface
+final readonly class UpperCase implements FilterInterface
 {
-    private readonly string $encoding;
+    private string $encoding;
 
     /**
      * @param Options $options

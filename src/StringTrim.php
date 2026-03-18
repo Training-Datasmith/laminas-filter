@@ -14,9 +14,9 @@ use function preg_replace;
  * }
  * @implements FilterInterface<string>
  */
-final class StringTrim implements FilterInterface
+final readonly class StringTrim implements FilterInterface
 {
-    private readonly string $charlist;
+    private string $charlist;
 
     /** @param Options $options */
     public function __construct(array $options = [])

@@ -71,7 +71,7 @@ final class ZipAdapter implements ArchiveAdapterInterface
         }
 
         $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::KEY_AS_PATHNAME),
+            new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::KEY_AS_PATHNAME | \FilesystemIterator::SKIP_DOTS),
             RecursiveIteratorIterator::SELF_FIRST,
         );
 

@@ -35,19 +35,19 @@ use function str_starts_with;
  * }
  * @implements FilterInterface<string>
  */
-final class Inflector implements FilterInterface
+final readonly class Inflector implements FilterInterface
 {
     /** @var non-empty-string */
-    private readonly string $target;
-    private readonly bool $throwTargetExceptionsOn;
+    private string $target;
+    private bool $throwTargetExceptionsOn;
     /** @var non-empty-string */
-    private readonly string $targetReplacementIdentifier;
+    private string $targetReplacementIdentifier;
     /** @var array<string, string|list<InstanceType>> */
-    private readonly array $rules;
+    private array $rules;
 
     /** @param Options $options */
     public function __construct(
-        private readonly FilterPluginManager $pluginManager,
+        private FilterPluginManager $pluginManager,
         array $options,
     ) {
         $target = $options['target'] ?? null;
@@ -84,9 +84,7 @@ final class Inflector implements FilterInterface
             $name = ltrim($spec, ':');
             if (str_starts_with($spec, ':')) {
                 $resolved[$name] = array_map(
-                    function (string|FilterInterface|callable $filter): FilterInterface|callable {
-                        return $this->loadFilter($filter);
-                    },
+                    fn(string|FilterInterface|callable $filter): FilterInterface|callable => $this->loadFilter($filter),
                     is_string($ruleSet) ? [$ruleSet] : $ruleSet,
                 );
             } else {
@@ -111,10 +109,12 @@ final class Inflector implements FilterInterface
         // clean source
         $subject = [];
         foreach ($value as $sourceName => $sourceValue) {
-            if (! is_string($sourceName) || ! is_scalar($sourceValue)) {
+            if (! is_string($sourceName)) {
                 continue;
             }
-
+            if (! is_scalar($sourceValue)) {
+                continue;
+            }
             $sourceName           = ltrim($sourceName, ':');
             $subject[$sourceName] = (string) $sourceValue;
         }

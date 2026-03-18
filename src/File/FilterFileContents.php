@@ -15,10 +15,10 @@ use function is_writable;
 use function sprintf;
 
 /** @internal */
-final class FilterFileContents
+final readonly class FilterFileContents
 {
     /** @param FilterInterface<string> $filter */
-    public function __construct(private readonly FilterInterface $filter)
+    public function __construct(private FilterInterface $filter)
     {
     }
 

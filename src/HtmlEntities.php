@@ -21,22 +21,22 @@ use const ENT_QUOTES;
  * }
  * @implements FilterInterface<string>
  */
-final class HtmlEntities implements FilterInterface
+final readonly class HtmlEntities implements FilterInterface
 {
     /**
      * Corresponds to the second htmlentities() argument
      */
-    private readonly int $quoteStyle;
+    private int $quoteStyle;
 
     /**
      * Corresponds to the third htmlentities() argument
      */
-    private readonly string $encoding;
+    private string $encoding;
 
     /**
      * Corresponds to the forth htmlentities() argument
      */
-    private readonly bool $doubleQuote;
+    private bool $doubleQuote;
 
     /**
      * Sets filter options

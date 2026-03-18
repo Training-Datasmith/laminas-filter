@@ -27,10 +27,10 @@ use function strtolower;
  *     mode?: 'gz'|'bz2'|'GZ'|'BZ2'|null,
  * }
  */
-final class TarAdapter implements ArchiveAdapterInterface
+final readonly class TarAdapter implements ArchiveAdapterInterface
 {
     /** @var 'gz'|'bz2' */
-    private readonly string $mode;
+    private string $mode;
 
     /**
      * @param Options $options
@@ -78,7 +78,7 @@ final class TarAdapter implements ArchiveAdapterInterface
         }
 
         $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::KEY_AS_PATHNAME),
+            new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::KEY_AS_PATHNAME | \FilesystemIterator::SKIP_DOTS),
             RecursiveIteratorIterator::SELF_FIRST,
         );
 

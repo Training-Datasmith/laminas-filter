@@ -20,10 +20,10 @@ use function preg_replace;
  * @template TOptions of Options
  * @implements FilterInterface<string|array<array-key, string|mixed>>
  */
-final class SeparatorToSeparator implements FilterInterface
+final readonly class SeparatorToSeparator implements FilterInterface
 {
-    private readonly string $searchSeparator;
-    private readonly string $replacementSeparator;
+    private string $searchSeparator;
+    private string $replacementSeparator;
 
     /** @param Options $options */
     public function __construct(array $options = [])

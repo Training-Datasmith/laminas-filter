@@ -37,15 +37,15 @@ use const PATHINFO_EXTENSION;
  * }
  * @implements FilterInterface<string>
  */
-final class RenameUpload implements FilterInterface
+final readonly class RenameUpload implements FilterInterface
 {
-    private readonly string $targetDirectory;
-    private readonly string $targetFilename;
-    private readonly bool $useUploadName;
-    private readonly bool $useUploadExtension;
-    private readonly bool $overwrite;
-    private readonly bool $randomize;
-    private readonly MoveUploadedFileInterface $moveUploadedFile;
+    private string $targetDirectory;
+    private string $targetFilename;
+    private bool $useUploadName;
+    private bool $useUploadExtension;
+    private bool $overwrite;
+    private bool $randomize;
+    private MoveUploadedFileInterface $moveUploadedFile;
 
     /** @param Options $options */
     public function __construct(

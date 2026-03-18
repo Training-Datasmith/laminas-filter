@@ -20,10 +20,10 @@ use function is_string;
  * }
  * @implements FilterInterface<UnitEnum|BackedEnum>
  */
-final class ToEnum implements FilterInterface
+final readonly class ToEnum implements FilterInterface
 {
     /** @var class-string<UnitEnum>|class-string<BackedEnum> */
-    private readonly string $enum;
+    private string $enum;
 
     /** @param Options $options */
     public function __construct(array $options)

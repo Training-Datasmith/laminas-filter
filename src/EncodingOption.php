@@ -38,7 +38,7 @@ final class EncodingOption
      */
     public static function assertWithDefault(string|null $encoding): string
     {
-        $encoding = $encoding ?? mb_internal_encoding();
+        $encoding ??= mb_internal_encoding();
 
         return self::assert($encoding);
     }

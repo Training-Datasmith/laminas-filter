@@ -23,12 +23,12 @@ use function str_contains;
  * }
  * @implements FilterInterface<string|array<array-key, string|mixed>>
  */
-final class PregReplace implements FilterInterface
+final readonly class PregReplace implements FilterInterface
 {
     /** @var list<non-empty-string>|non-empty-string */
-    private readonly array|string $pattern;
+    private array|string $pattern;
     /** @var list<string>|string */
-    private readonly array|string $replacement;
+    private array|string $replacement;
 
     /**
      * Supported options are
@@ -68,7 +68,7 @@ final class PregReplace implements FilterInterface
      * @return list<non-empty-string>|non-empty-string
      * @throws InvalidArgumentException
      */
-    private function validatePattern(string|array|null $pattern): array|string
+    private function validatePattern(string|array|null $pattern): array
     {
         $test = array_values(array_filter(
             is_array($pattern) ? $pattern : [$pattern],

@@ -37,10 +37,10 @@ use function unlink;
  *  }
  * @implements FilterInterface<string>
  */
-final class Rename implements FilterInterface
+final readonly class Rename implements FilterInterface
 {
     /** @var list<DefaultedOptionsSet> */
-    private readonly array $options;
+    private array $options;
 
     /** @param Options $options */
     public function __construct(array $options = [])

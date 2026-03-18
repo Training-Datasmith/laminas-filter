@@ -22,9 +22,9 @@ use const DIRECTORY_SEPARATOR;
  * }
  * @implements FilterInterface<string>
  */
-final class RealPath implements FilterInterface
+final readonly class RealPath implements FilterInterface
 {
-    private readonly bool $pathMustExist;
+    private bool $pathMustExist;
 
     /** @param Options $options */
     public function __construct(array $options = [])

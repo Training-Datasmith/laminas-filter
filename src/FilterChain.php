@@ -117,7 +117,6 @@ final class FilterChain implements FilterChainInterface, Countable, IteratorAggr
     public function filter(mixed $value): mixed
     {
         foreach ($this as $filter) {
-            /** @var mixed $value */
             $value = $filter($value);
         }
 

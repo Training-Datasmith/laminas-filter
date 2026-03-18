@@ -22,9 +22,9 @@ use const PREG_SPLIT_NO_EMPTY;
  * @template TOptions of Options
  * @implements FilterInterface<string|array<array-key, string|mixed>>
  */
-final class CamelCaseToSeparator implements FilterInterface
+final readonly class CamelCaseToSeparator implements FilterInterface
 {
-    private readonly string $separator;
+    private string $separator;
 
     /** @param Options $options */
     public function __construct(array $options = [])

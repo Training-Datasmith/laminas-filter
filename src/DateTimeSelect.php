@@ -17,10 +17,10 @@ use function sprintf;
  * }
  * @implements FilterInterface<string|null>
  */
-final class DateTimeSelect implements FilterInterface
+final readonly class DateTimeSelect implements FilterInterface
 {
-    private readonly bool $returnNullIfAnyFieldEmpty;
-    private readonly bool $returnNullIfAllFieldsEmpty;
+    private bool $returnNullIfAnyFieldEmpty;
+    private bool $returnNullIfAllFieldsEmpty;
 
     /** @param Options $options */
     public function __construct(array $options = [])
@@ -145,7 +145,6 @@ final class DateTimeSelect implements FilterInterface
     /** @param mixed[] $value */
     private function getValue(array $value, string $string, ?int $defult = null): mixed
     {
-        /** @var mixed $result */
         $result = $value[$string] ?? $defult;
         return $result === '' ? $defult : $result;
     }

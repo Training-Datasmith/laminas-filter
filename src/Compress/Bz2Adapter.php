@@ -21,12 +21,12 @@ use function sprintf;
  *     blocksize?: int<1, 9>|null,
  * }
  */
-final class Bz2Adapter implements StringCompressionAdapterInterface
+final readonly class Bz2Adapter implements StringCompressionAdapterInterface
 {
     private const DEFAULT_BLOCK_SIZE = 4;
 
     /** @var int<1, 9> */
-    private readonly int $blockSize;
+    private int $blockSize;
 
     /**
      * @param Options $options (Optional) Options to set

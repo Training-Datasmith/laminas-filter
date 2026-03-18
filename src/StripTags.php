@@ -33,7 +33,7 @@ use const CASE_LOWER;
  * }
  * @implements FilterInterface<string>
  */
-final class StripTags implements FilterInterface
+final readonly class StripTags implements FilterInterface
 {
     /**
      * Array of allowed tags and allowed attributes for each allowed tag
@@ -43,7 +43,7 @@ final class StripTags implements FilterInterface
      *
      * @var array<string, list<string>>
      */
-    private readonly array $tagsAllowed;
+    private array $tagsAllowed;
 
     /**
      * Array of allowed attributes for all allowed tags
@@ -52,7 +52,7 @@ final class StripTags implements FilterInterface
      *
      * @var list<string>
      */
-    private readonly array $attributesAllowed;
+    private array $attributesAllowed;
 
     /**
      * @param Options $options
@@ -60,7 +60,7 @@ final class StripTags implements FilterInterface
     public function __construct(array $options = [])
     {
         $this->attributesAllowed = array_map(
-            static fn (string $attribute): string => strtolower($attribute),
+            strtolower(...),
             $options['allowAttribs'] ?? [],
         );
 
@@ -69,7 +69,7 @@ final class StripTags implements FilterInterface
         if (array_is_list($tagsAllowed)) {
             /** @psalm-var list<string> $tagsAllowed */
             $tags = array_map(
-                static fn (string $tag): string => strtolower($tag),
+                strtolower(...),
                 $tagsAllowed,
             );
 
@@ -80,8 +80,8 @@ final class StripTags implements FilterInterface
 
         /** @psalm-var array<string, list<string>> $tagsAllowed */
         $this->tagsAllowed = array_map(
-            static fn (array $attributes) => array_map(
-                static fn (string $attribute): string => strtolower($attribute),
+            static fn (array $attributes): array => array_map(
+                strtolower(...),
                 $attributes,
             ),
             array_change_key_case($tagsAllowed, CASE_LOWER),

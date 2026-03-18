@@ -18,9 +18,9 @@ use function preg_replace_callback;
  * }
  * @implements FilterInterface<string|array<array-key, string|mixed>>
  */
-final class SeparatorToCamelCase implements FilterInterface
+final readonly class SeparatorToCamelCase implements FilterInterface
 {
-    private readonly string $separator;
+    private string $separator;
 
     /** @param Options $options */
     public function __construct(array $options = [])

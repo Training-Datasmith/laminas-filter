@@ -22,7 +22,7 @@ use function gzuncompress;
  *     mode?: 'deflate'|'compress',
  * }
  */
-final class GzAdapter implements StringCompressionAdapterInterface
+final readonly class GzAdapter implements StringCompressionAdapterInterface
 {
     /**
      * Compression level
@@ -31,10 +31,10 @@ final class GzAdapter implements StringCompressionAdapterInterface
      *
      * @var int<-1, 9>
      */
-    private readonly int $level;
+    private int $level;
 
     /** @var 'deflate'|'compress' */
-    private readonly string $mode;
+    private string $mode;
 
     /**
      * @param Options $options (Optional) Options to set

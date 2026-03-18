@@ -21,7 +21,7 @@ final class FilterChainFactory implements FactoryInterface
          *
          * @psalm-var FilterChainConfiguration $options
          */
-        $options       = $options ?? [];
+        $options ??= [];
         $pluginManager = $container->get(FilterPluginManager::class);
         assert($pluginManager instanceof FilterPluginManager);
 

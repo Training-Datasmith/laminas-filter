@@ -21,7 +21,7 @@ final class ImmutableFilterChainFactory implements FactoryInterface
          * It's not worth attempting runtime validation of the specification shape
          * @psalm-var ChainSpec $options
          */
-        $options       = $options ?? [];
+        $options ??= [];
         $pluginManager = $container->get(FilterPluginManager::class);
         assert($pluginManager instanceof FilterPluginManager);
 

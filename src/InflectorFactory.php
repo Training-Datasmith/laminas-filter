@@ -19,7 +19,7 @@ final class InflectorFactory implements FactoryInterface
         ?array $options = null,
     ): Inflector {
         /** @psalm-var Options $options - Forcing this type to avoid unnecessary runtime validation */
-        $options       = $options ?? [];
+        $options ??= [];
         $pluginManager = $container->get(FilterPluginManager::class);
         assert($pluginManager instanceof FilterPluginManager);
 

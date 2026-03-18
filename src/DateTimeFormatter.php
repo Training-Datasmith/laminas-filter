@@ -21,17 +21,17 @@ use function is_string;
  * }
  * @implements FilterInterface<string>
  */
-final class DateTimeFormatter implements FilterInterface
+final readonly class DateTimeFormatter implements FilterInterface
 {
     /**
      * A valid format string accepted by date()
      */
-    private readonly string $format;
+    private string $format;
 
     /**
      * A valid timezone string
      */
-    private readonly DateTimeZone $timezone;
+    private DateTimeZone $timezone;
 
     /**
      * @param Options $options
@@ -44,7 +44,7 @@ final class DateTimeFormatter implements FilterInterface
             $this->timezone = new DateTimeZone(
                 $options['timezone'] ?? date_default_timezone_get()
             );
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             throw new InvalidArgumentException('Invalid timezone provided');
         }
     }
@@ -66,13 +66,13 @@ final class DateTimeFormatter implements FilterInterface
 
         try {
             if (is_int($value)) {
-                $value = '@' . (string) $value;
+                $value = '@' . $value;
             }
 
             if (is_string($value)) {
                 $value = new DateTimeImmutable($value, $this->timezone);
             }
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             throw new InvalidArgumentException('Invalid date/time string provided');
         }
 

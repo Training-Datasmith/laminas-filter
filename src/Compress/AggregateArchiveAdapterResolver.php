@@ -10,10 +10,10 @@ use Laminas\Filter\File\FileInformation;
 use function array_values;
 use function sprintf;
 
-final class AggregateArchiveAdapterResolver implements ArchiveAdapterResolverInterface
+final readonly class AggregateArchiveAdapterResolver implements ArchiveAdapterResolverInterface
 {
     /** @var list<ArchiveAdapterResolverInterface> */
-    private readonly array $matchers;
+    private array $matchers;
 
     public function __construct(ArchiveAdapterResolverInterface ...$matchers)
     {
