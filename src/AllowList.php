@@ -27,7 +27,7 @@ final readonly class AllowList implements FilterInterface
     /** @param Options $options */
     public function __construct(array $options = [])
     {
-        $this->strict = $options['strict'] ?? false;
+        $this->strict = $options['strict'] ?? true;
         $list         = $options['list'] ?? [];
         $this->list   = $list instanceof Traversable
             ? iterator_to_array($list, false)
