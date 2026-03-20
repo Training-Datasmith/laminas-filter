@@ -1,28 +1,24 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Filter;
 
 use function is_scalar;
 use function mb_strtoupper;
-
 /**
  * @psalm-type Options = array{encoding?: string}
  * @implements FilterInterface<string>
  */
-final readonly class StringToUpper implements FilterInterface
+final readonly class String_To_Upper implements Filter_Interface
 {
     private string $encoding;
-
     /**
      * @param Options $options
      */
     public function __construct(array $options = [])
     {
-        $this->encoding = EncodingOption::assertWithDefault($options['encoding'] ?? null);
+        $this->encoding = Encoding_Option::assert_with_default($options['encoding'] ?? null);
     }
-
     /**
      * Returns the string $value, converting characters to uppercase as necessary
      *
@@ -30,13 +26,11 @@ final readonly class StringToUpper implements FilterInterface
      */
     public function filter(mixed $value): mixed
     {
-        if (! is_scalar($value)) {
+        if (!is_scalar($value)) {
             return $value;
         }
-
         return mb_strtoupper((string) $value, $this->encoding);
     }
-
     public function __invoke(mixed $value): mixed
     {
         return $this->filter($value);

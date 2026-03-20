@@ -1,30 +1,26 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Filter;
 
 use function assert;
 use function is_string;
 use function preg_replace;
-
 /**
  * @psalm-type Options = array{
  *     charlist?: string|null,
  * }
  * @implements FilterInterface<string>
  */
-final readonly class StringTrim implements FilterInterface
+final readonly class String_Trim implements Filter_Interface
 {
     private string $charlist;
-
     /** @param Options $options */
     public function __construct(array $options = [])
     {
-        $list           = $options['charlist'] ?? '\\\\s';
+        $list = $options['charlist'] ?? '\\\\s';
         $this->charlist = $list === '' ? '\\\\s' : $list;
     }
-
     /**
      * Returns the string $value with characters stripped from the beginning and end
      *
@@ -32,33 +28,23 @@ final readonly class StringTrim implements FilterInterface
      */
     public function filter(mixed $value): mixed
     {
-        if (! is_string($value)) {
+        if (!is_string($value)) {
             return $value;
         }
-
-        return $this->unicodeTrim($value);
+        return $this->unicode_trim($value);
     }
-
     /**
      * Unicode aware trim method
      */
-    private function unicodeTrim(string $value): string
+    private function unicode_trim(string $value): string
     {
-        $chars = preg_replace(
-            ['/[\^\-\]\\\]/S', '/\\\{4}/S', '/\//'],
-            ['\\\\\\0', '\\', '\/'],
-            $this->charlist,
-        );
+        $chars = preg_replace(['/[\^\-\]\\\\]/S', '/\\\\{4}/S', '/\//'], ['\\\\\\0', '\\', '\/'], $this->charlist);
         assert(is_string($chars));
-
         $pattern = '/^[' . $chars . ']+|[' . $chars . ']+$/usSD';
-
         $value = preg_replace($pattern, '', $value);
         assert(is_string($value));
-
         return $value;
     }
-
     public function __invoke(mixed $value): mixed
     {
         return $this->filter($value);

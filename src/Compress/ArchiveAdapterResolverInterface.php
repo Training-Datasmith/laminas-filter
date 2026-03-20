@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Filter\Compress;
 
 use Laminas\Filter\Exception\RuntimeException;
-use Laminas\Filter\File\FileInformation;
-
-interface ArchiveAdapterResolverInterface
+use Laminas\Filter\File\File_Information;
+interface Archive_Adapter_Resolver_Interface
 {
     /**
      * Return an adapter instance based on the filename extension of the given file path
@@ -16,5 +14,5 @@ interface ArchiveAdapterResolverInterface
      *
      * @throws RuntimeException If the matcher cannot figure out which adapter to use.
      */
-    public function resolve(FileInformation $file): ArchiveAdapterInterface;
+    public function resolve(File_Information $file): Archive_Adapter_Interface;
 }

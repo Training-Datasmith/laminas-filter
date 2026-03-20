@@ -1,22 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Filter;
 
 use function date_default_timezone_get;
-
 use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
-
 use function is_int;
-
 use function is_string;
-
 use Laminas\Filter\Exception\InvalidArgumentException;
 use Throwable;
-
 /**
  * @psalm-type Options = array{
  *      format?: non-empty-string,
@@ -24,34 +18,28 @@ use Throwable;
  * }
  * @implements FilterInterface<string>
  */
-final readonly class DateTimeFormatter implements FilterInterface
+final readonly class Date_Time_Formatter implements Filter_Interface
 {
     /**
      * A valid format string accepted by date()
      */
     private string $format;
-
     /**
      * A valid timezone string
      */
     private DateTimeZone $timezone;
-
     /**
      * @param Options $options
      */
     public function __construct(array $options = [])
     {
         $this->format = $options['format'] ?? DateTimeInterface::ATOM;
-
         try {
-            $this->timezone = new DateTimeZone(
-                $options['timezone'] ?? date_default_timezone_get()
-            );
+            $this->timezone = new DateTimeZone($options['timezone'] ?? date_default_timezone_get());
         } catch (Throwable) {
             throw new InvalidArgumentException('Invalid timezone provided');
         }
     }
-
     /**
      * Filter a datetime string by normalizing it to the filters specified format
      *
@@ -59,29 +47,21 @@ final readonly class DateTimeFormatter implements FilterInterface
      */
     public function filter(mixed $value): mixed
     {
-        if (
-            ! (is_string($value) && $value !== '')
-            && ! is_int($value)
-            && ! $value instanceof DateTimeInterface
-        ) {
+        if (!(is_string($value) && $value !== '') && !is_int($value) && !$value instanceof DateTimeInterface) {
             return $value;
         }
-
         try {
             if (is_int($value)) {
                 $value = '@' . $value;
             }
-
             if (is_string($value)) {
                 $value = new DateTimeImmutable($value, $this->timezone);
             }
         } catch (Throwable) {
             throw new InvalidArgumentException('Invalid date/time string provided');
         }
-
         return $value->format($this->format);
     }
-
     public function __invoke(mixed $value): mixed
     {
         return $this->filter($value);

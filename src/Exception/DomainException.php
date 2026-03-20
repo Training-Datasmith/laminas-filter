@@ -1,9 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Filter\Exception;
 
-final class DomainException extends \DomainException implements ExceptionInterface
+final class DomainException extends \DomainException implements Exception_Interface
 {
 }

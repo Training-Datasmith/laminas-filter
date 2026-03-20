@@ -1,11 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Filter;
 
 /** @template TFilteredValue */
-interface FilterInterface
+interface Filter_Interface
 {
     /**
      * Returns the result of filtering $value
@@ -16,7 +15,6 @@ interface FilterInterface
      * @throws Exception\RuntimeException If filtering $value is impossible.
      */
     public function filter(mixed $value): mixed;
-
     /**
      * Returns the result of filtering $value
      *

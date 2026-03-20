@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Filter\Compress;
 
 use Laminas\Filter\Exception\RuntimeException;
-
-interface StringCompressionAdapterInterface
+interface String_Compression_Adapter_Interface
 {
     /**
      * Compress a string
@@ -16,7 +14,6 @@ interface StringCompressionAdapterInterface
      * @throws RuntimeException If compression is not successful.
      */
     public function compress(string $value): string;
-
     /**
      * Decompress a string
      *

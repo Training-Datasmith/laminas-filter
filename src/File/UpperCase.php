@@ -1,35 +1,29 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Filter\File;
 
 use function is_array;
 use function is_string;
-
-use Laminas\Filter\EncodingOption;
+use Laminas\Filter\Encoding_Option;
 use Laminas\Filter\Exception\InvalidArgumentException;
 use Laminas\Filter\Exception\RuntimeException;
-
-use Laminas\Filter\FilterInterface;
-use Laminas\Filter\StringToUpper;
-
+use Laminas\Filter\Filter_Interface;
+use Laminas\Filter\String_To_Upper;
 /**
  * @psalm-type Options = array{encoding?: string}
  * @implements FilterInterface<mixed>
  */
-final readonly class UpperCase implements FilterInterface
+final readonly class Upper_Case implements Filter_Interface
 {
     private string $encoding;
-
     /**
      * @param Options $options
      */
     public function __construct(array $options = [])
     {
-        $this->encoding = EncodingOption::assertWithDefault($options['encoding'] ?? null);
+        $this->encoding = Encoding_Option::assert_with_default($options['encoding'] ?? null);
     }
-
     /**
      * Defined by Laminas\Filter\FilterInterface
      *
@@ -41,32 +35,23 @@ final readonly class UpperCase implements FilterInterface
      */
     public function filter(mixed $value): mixed
     {
-        $filePath = null;
-
+        $file_path = null;
         if (is_string($value)) {
-            $filePath = $value;
+            $file_path = $value;
         }
-
         // An uploaded file? Retrieve the 'tmp_name'
         if (is_array($value)) {
-            if (! isset($value['tmp_name']) || ! is_string($value['tmp_name'])) {
+            if (!isset($value['tmp_name']) || !is_string($value['tmp_name'])) {
                 return $value;
             }
-
-            $filePath = $value['tmp_name'];
+            $file_path = $value['tmp_name'];
         }
-
-        if ($filePath === null) {
+        if ($file_path === null) {
             return $value;
         }
-
-        (new FilterFileContents(
-            new StringToUpper(['encoding' => $this->encoding]),
-        ))($filePath);
-
+        (new Filter_File_Contents(new String_To_Upper(['encoding' => $this->encoding])))($file_path);
         return $value;
     }
-
     /** @inheritDoc */
     public function __invoke(mixed $value): mixed
     {

@@ -1,23 +1,18 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Filter;
 
 use function array_filter;
-
 use function array_values;
 use function assert;
 use function is_array;
 use function is_string;
-
 use Laminas\Filter\Exception\InvalidArgumentException;
-
 use function preg_match;
 use function preg_replace;
 use function sprintf;
 use function str_contains;
-
 /**
  * @psalm-type Options = array{
  *     pattern: non-empty-string|list<non-empty-string>,
@@ -25,13 +20,12 @@ use function str_contains;
  * }
  * @implements FilterInterface<string|array<array-key, string|mixed>>
  */
-final readonly class PregReplace implements FilterInterface
+final readonly class Preg_Replace implements Filter_Interface
 {
     /** @var list<non-empty-string>|non-empty-string */
     private array|string $pattern;
     /** @var list<string>|string */
     private array|string $replacement;
-
     /**
      * Supported options are
      *     'pattern'     => matching pattern
@@ -41,28 +35,21 @@ final readonly class PregReplace implements FilterInterface
      */
     public function __construct(array $options)
     {
-        $this->pattern     = $this->validatePattern($options['pattern']);
+        $this->pattern = $this->validate_pattern($options['pattern']);
         $this->replacement = $options['replacement'] ?? '';
     }
-
     public function filter(mixed $value): mixed
     {
-        return ScalarOrArrayFilterCallback::applyRecursively(
-            $value,
-            function (string $value): string {
-                $result = preg_replace($this->pattern, $this->replacement, $value);
-                assert(is_string($result));
-
-                return $result;
-            },
-        );
+        return Scalar_Or_Array_Filter_Callback::apply_recursively($value, function (string $value): string {
+            $result = preg_replace($this->pattern, $this->replacement, $value);
+            assert(is_string($result));
+            return $result;
+        });
     }
-
     public function __invoke(mixed $value): mixed
     {
         return $this->filter($value);
     }
-
     /**
      * Validate pattern(s) and ensure they do not contain the "e" modifier
      *
@@ -70,32 +57,20 @@ final readonly class PregReplace implements FilterInterface
      * @return list<non-empty-string>|non-empty-string
      * @throws InvalidArgumentException
      */
-    private function validatePattern(string|array|null $pattern): array
+    private function validate_pattern(string|array|null $pattern): array
     {
-        $test = array_values(array_filter(
-            is_array($pattern) ? $pattern : [$pattern],
-            static fn (mixed $value): bool => is_string($value) && $value !== '',
-        ));
-
+        $test = array_values(array_filter(is_array($pattern) ? $pattern : [$pattern], static fn(mixed $value): bool => is_string($value) && $value !== ''));
         if ($test === []) {
-            throw new InvalidArgumentException(
-                'The pattern option must be a non-empty string, or a list of non-empty strings',
-            );
+            throw new InvalidArgumentException('The pattern option must be a non-empty string, or a list of non-empty strings');
         }
-
         foreach ($test as $item) {
-            if (! preg_match('/(?<modifier>[imsxeADSUXJu]+)$/', $item, $matches)) {
+            if (!preg_match('/(?<modifier>[imsxeADSUXJu]+)$/', $item, $matches)) {
                 continue;
             }
-
             if (str_contains($matches['modifier'], 'e')) {
-                throw new InvalidArgumentException(sprintf(
-                    'Pattern for a PregReplace filter may not contain the "e" pattern modifier; received "%s"',
-                    $item,
-                ));
+                throw new InvalidArgumentException(sprintf('Pattern for a PregReplace filter may not contain the "e" pattern modifier; received "%s"', $item));
             }
         }
-
         return $test;
     }
 }

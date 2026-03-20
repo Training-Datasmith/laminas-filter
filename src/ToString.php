@@ -1,11 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Filter;
 
 /** @implements FilterInterface<mixed> */
-final class ToString implements FilterInterface
+final class To_String implements Filter_Interface
 {
     /**
      * Returns (string) $value
@@ -14,12 +13,8 @@ final class ToString implements FilterInterface
      */
     public function filter(mixed $value): mixed
     {
-        return ScalarOrArrayFilterCallback::applyRecursively(
-            $value,
-            fn (string $value): string => $value,
-        );
+        return Scalar_Or_Array_Filter_Callback::apply_recursively($value, fn(string $value): string => $value);
     }
-
     public function __invoke(mixed $value): mixed
     {
         return $this->filter($value);

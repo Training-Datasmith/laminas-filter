@@ -1,19 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Filter\Word;
 
-use Laminas\Filter\FilterInterface;
-
+use Laminas\Filter\Filter_Interface;
 /** @implements FilterInterface<string|array<array-key, string|mixed>> */
-final class UnderscoreToDash implements FilterInterface
+final class Underscore_To_Dash implements Filter_Interface
 {
     public function filter(mixed $value): mixed
     {
-        return (new UnderscoreToSeparator(['separator' => '-']))->filter($value);
+        return (new Underscore_To_Separator(['separator' => '-']))->filter($value);
     }
-
     public function __invoke(mixed $value): mixed
     {
         return $this->filter($value);

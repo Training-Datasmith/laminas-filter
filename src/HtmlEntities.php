@@ -1,20 +1,15 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Filter;
 
 use function assert;
-
 use const ENT_QUOTES;
-
 use function function_exists;
 use function htmlentities;
 use function iconv;
 use function is_string;
-
 use function strlen;
-
 /**
  * @psalm-type Options = array{
  *     quotestyle?: int,
@@ -23,23 +18,20 @@ use function strlen;
  * }
  * @implements FilterInterface<string>
  */
-final readonly class HtmlEntities implements FilterInterface
+final readonly class Html_Entities implements Filter_Interface
 {
     /**
      * Corresponds to the second htmlentities() argument
      */
-    private int $quoteStyle;
-
+    private int $quote_style;
     /**
      * Corresponds to the third htmlentities() argument
      */
     private string $encoding;
-
     /**
      * Corresponds to the forth htmlentities() argument
      */
-    private bool $doubleQuote;
-
+    private bool $double_quote;
     /**
      * Sets filter options
      *
@@ -47,11 +39,10 @@ final readonly class HtmlEntities implements FilterInterface
      */
     public function __construct(array $options = [])
     {
-        $this->quoteStyle  = $options['quotestyle'] ?? ENT_QUOTES;
-        $this->encoding    = $options['encoding'] ?? 'UTF-8';
-        $this->doubleQuote = $options['doublequote'] ?? true;
+        $this->quote_style = $options['quotestyle'] ?? ENT_QUOTES;
+        $this->encoding = $options['encoding'] ?? 'UTF-8';
+        $this->double_quote = $options['doublequote'] ?? true;
     }
-
     /**
      * Defined by Laminas\Filter\FilterInterface
      *
@@ -64,26 +55,23 @@ final readonly class HtmlEntities implements FilterInterface
      */
     public function filter(mixed $value): mixed
     {
-        if (! is_string($value) || $value === '') {
+        if (!is_string($value) || $value === '') {
             return $value;
         }
-
-        $filtered = htmlentities($value, $this->quoteStyle, $this->encoding, $this->doubleQuote);
+        $filtered = htmlentities($value, $this->quote_style, $this->encoding, $this->double_quote);
         if (strlen($filtered) === 0) {
-            if (! function_exists('iconv')) {
+            if (!function_exists('iconv')) {
                 throw new Exception\DomainException('Encoding mismatch has resulted in htmlentities errors');
             }
-
             $value = iconv('', $this->encoding . '//IGNORE', $value);
             assert(is_string($value));
-            $filtered = htmlentities($value, $this->quoteStyle, $this->encoding, $this->doubleQuote);
+            $filtered = htmlentities($value, $this->quote_style, $this->encoding, $this->double_quote);
             if (strlen($filtered) === 0) {
                 throw new Exception\DomainException('Encoding mismatch has resulted in htmlentities errors');
             }
         }
         return $filtered;
     }
-
     public function __invoke(mixed $value): mixed
     {
         return $this->filter($value);

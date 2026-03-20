@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Filter;
 
 use function is_scalar;
-
 /** @implements FilterInterface<float> */
-final class ToFloat implements FilterInterface
+final class To_Float implements Filter_Interface
 {
     /**
      * Casts scalar values to float
@@ -16,13 +14,11 @@ final class ToFloat implements FilterInterface
      */
     public function filter(mixed $value): mixed
     {
-        if (! is_scalar($value)) {
+        if (!is_scalar($value)) {
             return $value;
         }
-
         return (float) $value;
     }
-
     public function __invoke(mixed $value): mixed
     {
         return $this->filter($value);
