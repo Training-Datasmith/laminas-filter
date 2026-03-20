@@ -65,7 +65,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "LaminasTest\\Filter\\": "test/"
+            "Laminas_Test\\Filter\\": "test/"
         }
     },
     "scripts": {
