@@ -20,7 +20,7 @@
     </projectFiles>
 
     <plugins>
-        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+        <pluginClass class="Psalm\Php_Unit_Plugin\Plugin"/>
     </plugins>
 
     <issueHandlers>

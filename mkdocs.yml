@@ -37,7 +37,7 @@ repo_url: 'https://github.com/laminas/laminas-filter'
 extra:
     project: Components
     installation:
-      config_provider_class: 'Laminas\Filter\ConfigProvider'
+      config_provider_class: 'Laminas\Filter\Config_Provider'
       module_class: 'Laminas\Filter\Module'
     current_version: v3
     versions:
