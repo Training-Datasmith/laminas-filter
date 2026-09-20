@@ -56,6 +56,10 @@ final class DecompressArchiveTest extends TestCase
     #[DataProvider('archiveProvider')]
     public function testThatRegularFilePathsWillBeDecompressed(string $value, string $expectFile): void
     {
+        if (str_ends_with($value, '.bz2') && ! extension_loaded('bz2')) {
+            self::markTestSkipped('This archive needs the bz2 extension');
+        }
+
         $filter = new DecompressArchive(['target' => $this->target]);
 
         $target = $filter->filter($value);
@@ -67,6 +71,10 @@ final class DecompressArchiveTest extends TestCase
     #[DataProvider('archiveProvider')]
     public function testInvoke(string $value, string $expectFile): void
     {
+        if (str_ends_with($value, '.bz2') && ! extension_loaded('bz2')) {
+            self::markTestSkipped('This archive needs the bz2 extension');
+        }
+
         $filter = new DecompressArchive(['target' => $this->target]);
 
         $target = $filter->__invoke($value);
@@ -78,6 +86,10 @@ final class DecompressArchiveTest extends TestCase
     #[DataProvider('archiveProvider')]
     public function testThatPHPFileArraysWillBeDecompressed(string $value, string $expectFile): void
     {
+        if (str_ends_with($value, '.bz2') && ! extension_loaded('bz2')) {
+            self::markTestSkipped('This archive needs the bz2 extension');
+        }
+
         $filter = new DecompressArchive(['target' => $this->target]);
 
         $data = [
@@ -97,6 +109,10 @@ final class DecompressArchiveTest extends TestCase
     #[DataProvider('archiveProvider')]
     public function testThatPsr7UploadsWillBeDecompressed(string $value, string $expectFile): void
     {
+        if (str_ends_with($value, '.bz2') && ! extension_loaded('bz2')) {
+            self::markTestSkipped('This archive needs the bz2 extension');
+        }
+
         $filter = new DecompressArchive(['target' => $this->target]);
 
         $size = filesize($value);

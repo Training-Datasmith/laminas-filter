@@ -47,6 +47,13 @@ final class TarAdapterTest extends TestCase
         TmpDirectory::cleanUp($this->dir);
     }
 
+    private static function skipIfBz2ModeUnavailable(?string $mode): void
+    {
+        if ($mode !== null && stripos($mode, 'bz2') !== false && ! extension_loaded('bz2')) {
+            self::markTestSkipped('This mode needs the bz2 extension');
+        }
+    }
+
     /** @return array<string, array{0:string|null}> */
     public static function modeProvider(): array
     {
@@ -64,6 +71,8 @@ final class TarAdapterTest extends TestCase
     #[DataProvider('modeProvider')]
     public function testCompressedStringContentsWillBeDecompressedToTheExpectedFile(string|null $mode): void
     {
+        self::skipIfBz2ModeUnavailable($mode);
+
         $value      = 'Some Content';
         $archive    = $this->dir . '/test.tar';
         $expectFile = $this->dir . '/SomeFile.txt';
@@ -85,6 +94,8 @@ final class TarAdapterTest extends TestCase
     #[DataProvider('modeProvider')]
     public function testTheContentsOfADirectoryWillBeCompressed(string|null $mode): void
     {
+        self::skipIfBz2ModeUnavailable($mode);
+
         $target  = __DIR__ . '/fixtures/directory-to-compress';
         $archive = $this->dir . '/test.tar';
         self::assertFileDoesNotExist($archive);
@@ -110,6 +121,8 @@ final class TarAdapterTest extends TestCase
     #[DataProvider('modeProvider')]
     public function testASingleFileCanBeCompressed(string|null $mode): void
     {
+        self::skipIfBz2ModeUnavailable($mode);
+
         $archive = $this->dir . '/test.tar';
         self::assertFileDoesNotExist($archive);
 
@@ -171,6 +184,10 @@ final class TarAdapterTest extends TestCase
 
     public function testDecompressAnArchiveToUnWritableTarget(): void
     {
+        if (str_contains(PHP_OS, 'WIN')) {
+            self::markTestSkipped('Read-only directory semantics differ on Windows.');
+        }
+
         $adapter = new TarAdapter();
         $archive = __DIR__ . '/fixtures/Archive.tar';
 
@@ -189,6 +206,10 @@ final class TarAdapterTest extends TestCase
 
     public function testCompressStringToUnWritableTarget(): void
     {
+        if (str_contains(PHP_OS, 'WIN')) {
+            self::markTestSkipped('Read-only directory semantics differ on Windows.');
+        }
+
         $adapter = new TarAdapter();
         $dir     = $this->makeReadOnlyDirectory();
         $archive = sprintf('%s/Test.tar', $dir);
@@ -204,6 +225,10 @@ final class TarAdapterTest extends TestCase
 
     public function testCompressDirectoryToUnWritableTarget(): void
     {
+        if (str_contains(PHP_OS, 'WIN')) {
+            self::markTestSkipped('Read-only directory semantics differ on Windows.');
+        }
+
         $adapter = new TarAdapter();
         $dir     = $this->makeReadOnlyDirectory();
         $archive = sprintf('%s/Test.tar', $dir);
@@ -219,6 +244,10 @@ final class TarAdapterTest extends TestCase
 
     public function testCompressFileToUnWritableTarget(): void
     {
+        if (str_contains(PHP_OS, 'WIN')) {
+            self::markTestSkipped('Read-only directory semantics differ on Windows.');
+        }
+
         $adapter = new TarAdapter();
         $dir     = $this->makeReadOnlyDirectory();
         $archive = sprintf('%s/Test.tar', $dir);

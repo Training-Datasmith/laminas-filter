@@ -44,6 +44,10 @@ final class StringCompressionTest extends TestCase
     #[DataProvider('settingsProvider')]
     public function testBasic(string $adapter, int $level): void
     {
+        if ($adapter === 'bz2' && ! extension_loaded('bz2')) {
+            self::markTestSkipped('This adapter needs the bz2 extension');
+        }
+
         $compress = new CompressString([
             'adapter' => $adapter,
             'level'   => $level,
@@ -112,6 +116,10 @@ final class StringCompressionTest extends TestCase
 
     public function testMismatchedAdaptersCausesException(): void
     {
+        if (! extension_loaded('bz2')) {
+            self::markTestSkipped('This test needs the bz2 extension');
+        }
+
         $compress = new CompressString([
             'adapter' => 'gz',
         ]);

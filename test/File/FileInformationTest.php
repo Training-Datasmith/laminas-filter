@@ -101,6 +101,10 @@ final class FileInformationTest extends TestCase
 
     public function testUnReadableFile(): void
     {
+        if (str_contains(PHP_OS, 'WIN')) {
+            self::markTestSkipped('File permission semantics differ on Windows.');
+        }
+
         $path = __DIR__ . '/fixtures/no-read.txt';
         touch($path);
         chmod($path, 0333);

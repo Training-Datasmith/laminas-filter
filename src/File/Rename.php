@@ -103,8 +103,8 @@ final readonly class Rename implements FilterInterface
     {
         $file = $this->getFileName($sourceFilePath, $matchingOptions);
 
-        if ($file === $sourceFilePath) {
-            return $file;
+        if (str_replace('\\', '/', $file) === str_replace('\\', '/', $sourceFilePath)) {
+            return $sourceFilePath;
         }
 
         if ($matchingOptions['overwrite'] && file_exists($file)) {
@@ -115,11 +115,12 @@ final readonly class Rename implements FilterInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 '"File "%s" could not be renamed to "%s"; target file already exists',
                 $sourceFilePath,
-                $file
+                str_replace('\\', '/', $file)
             ));
         }
 
-        $result = rename($sourceFilePath, $file);
+        $destination = str_replace('/', DIRECTORY_SEPARATOR, $file);
+        $result      = rename($sourceFilePath, $destination);
 
         if ($result !== true) {
             throw new Exception\RuntimeException(
@@ -131,7 +132,7 @@ final readonly class Rename implements FilterInterface
             );
         }
 
-        return $file;
+        return str_replace('\\', '/', $destination);
     }
 
     /**
@@ -147,8 +148,10 @@ final readonly class Rename implements FilterInterface
             return $value;
         }
 
+        $normalizedValue = str_replace('\\', '/', $value);
+
         foreach ($this->options as $option) {
-            if (fnmatch($option['match'], $value)) {
+            if (fnmatch(str_replace('\\', '/', $option['match']), $normalizedValue)) {
                 return $this->renameFile($value, $option);
             }
         }
@@ -167,11 +170,11 @@ final readonly class Rename implements FilterInterface
         $targetDir  = $matchingOptions['target_directory'] === '*' ?
             $fileInfo['dirname'] : $matchingOptions['target_directory'];
 
-        $target = $targetDir . '/' . $targetName;
+        $target = rtrim($targetDir, '/\\') . DIRECTORY_SEPARATOR . $targetName;
 
         if ($matchingOptions['randomize']) {
             $info      = pathinfo($target);
-            $newTarget = $info['dirname'] . '/' . $info['filename'] . uniqid('_');
+            $newTarget = $info['dirname'] . DIRECTORY_SEPARATOR . $info['filename'] . uniqid('_');
             if (isset($info['extension'])) {
                 $newTarget .= '.' . $info['extension'];
             }

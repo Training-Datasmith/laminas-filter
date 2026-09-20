@@ -148,6 +148,10 @@ final class ZipAdapterTest extends TestCase
 
     public function testCompressionToAnUnWritableDirectory(): void
     {
+        if (str_contains(PHP_OS, 'WIN')) {
+            self::markTestSkipped('Read-only directory semantics differ on Windows.');
+        }
+
         $dir = $this->tmp . '/un-writable';
         mkdir($dir);
         chmod($dir, 0400);
@@ -167,6 +171,10 @@ final class ZipAdapterTest extends TestCase
     #[WithoutErrorHandler]
     public function testDecompressionToAnUnWritableTargetDirectory(): void
     {
+        if (str_contains(PHP_OS, 'WIN')) {
+            self::markTestSkipped('Read-only directory semantics differ on Windows.');
+        }
+
         // ZipArchive emits warnings here
         set_error_handler(
             static fn (int $_a, string $_b): bool => true, // phpcs:ignore

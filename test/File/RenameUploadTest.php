@@ -45,6 +45,20 @@ final class RenameUploadTest extends TestCase
         return self::$workDirectory;
     }
 
+    protected function tearDown(): void
+    {
+        $target = self::workDirectory() . '/target';
+        if (! is_dir($target)) {
+            return;
+        }
+
+        foreach (glob($target . '/*') ?: [] as $file) {
+            if (is_file($file)) {
+                unlink($file);
+            }
+        }
+    }
+
     public static function tearDownAfterClass(): void
     {
         if (self::$workDirectory === null) {
@@ -134,10 +148,12 @@ final class RenameUploadTest extends TestCase
 
         $result = $filter->__invoke($input);
 
-        self::assertSame($expectFile, $result);
+        self::assertSame(str_replace('\\', '/', $expectFile), str_replace('\\', '/', $result));
 
         self::assertFileExists($result);
         self::assertFileDoesNotExist($file->path);
+
+        unlink($result);
     }
 
     #[DataProvider('fileProvider')]
@@ -164,7 +180,7 @@ final class RenameUploadTest extends TestCase
 
         $result = $filter->__invoke($input);
 
-        self::assertSame($expectFile, $result);
+        self::assertSame(str_replace('\\', '/', $expectFile), str_replace('\\', '/', $result));
 
         self::assertFileExists($result);
         self::assertFileDoesNotExist($file->path);
@@ -236,7 +252,7 @@ final class RenameUploadTest extends TestCase
 
         $result = $filter->__invoke($input);
         self::assertIsString($result);
-        self::assertSame($target, $result);
+        self::assertSame(str_replace('\\', '/', $target), str_replace('\\', '/', $result));
 
         self::assertFileExists($result);
         self::assertFileDoesNotExist($file->path);

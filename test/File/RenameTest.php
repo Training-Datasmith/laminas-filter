@@ -48,6 +48,11 @@ final class RenameTest extends TestCase
     /** @var non-empty-string|null */
     private static ?string $tmpSubDirectoryPath = null;
 
+    private static function normalizePath(string $path): string
+    {
+        return str_replace('\\', '/', $path);
+    }
+
     /** @return non-empty-string */
     private static function getTempPath(): string
     {
@@ -206,7 +211,10 @@ final class RenameTest extends TestCase
         $filter = new FileRename($options);
 
         try {
-            self::assertSame($expectedFilterResult, $filter->filter($input));
+            self::assertSame(
+                self::normalizePath($expectedFilterResult),
+                self::normalizePath($filter->filter($input))
+            );
             self::assertFileExists($expectedFilterResult);
         } finally {
             if (file_exists($expectedFilterResult)) {
@@ -258,11 +266,11 @@ final class RenameTest extends TestCase
         $filter = new FileRename(['rename_to' => $newFile, 'overwrite' => true]);
 
         try {
-            self::assertSame($expectedNewPath, $filter->filter($oldFile));
+            self::assertSame(self::normalizePath($expectedNewPath), self::normalizePath($filter->filter($oldFile)));
             self::assertFileExists($expectedNewPath);
 
             self::createSourceFile();
-            self::assertSame($expectedNewPath, $filter->filter($oldFile));
+            self::assertSame(self::normalizePath($expectedNewPath), self::normalizePath($filter->filter($oldFile)));
             self::assertFileExists($expectedNewPath);
         } finally {
             if (file_exists($expectedNewPath)) {
@@ -282,7 +290,7 @@ final class RenameTest extends TestCase
         $filter = new FileRename(['rename_to' => $newFile]);
 
         try {
-            self::assertSame($expectedNewPath, $filter->filter($oldFile));
+            self::assertSame(self::normalizePath($expectedNewPath), self::normalizePath($filter->filter($oldFile)));
             self::assertFileExists($expectedNewPath);
 
             self::createSourceFile();
@@ -292,7 +300,7 @@ final class RenameTest extends TestCase
                 sprintf(
                     '"File "%s" could not be renamed to "%s"; target file already exists',
                     $oldFile,
-                    $expectedNewPath
+                    self::normalizePath($expectedNewPath)
                 )
             );
 
@@ -317,8 +325,8 @@ final class RenameTest extends TestCase
             $result = $filter->filter($oldFile);
 
             self::assertMatchesRegularExpression(
-                '#' . preg_quote($fileNoExt) . '_.{13}\.xml#',
-                $result
+                '#' . preg_quote(self::normalizePath($fileNoExt)) . '_.{13}\.xml#',
+                self::normalizePath($result)
             );
         } finally {
             if (isset($result) && file_exists($result)) {
@@ -339,8 +347,8 @@ final class RenameTest extends TestCase
             $result = $filter->filter($oldFile);
 
             self::assertMatchesRegularExpression(
-                '#' . preg_quote($fileNoExt) . '_.{13}#',
-                $result
+                '#' . preg_quote(self::normalizePath($fileNoExt)) . '_.{13}#',
+                self::normalizePath($result)
             );
         } finally {
             if (isset($result) && file_exists($result)) {
@@ -389,6 +397,10 @@ final class RenameTest extends TestCase
 
     public function testTargetDirectoryIsNotWritable(): void
     {
+        if (str_contains(PHP_OS, 'WIN')) {
+            self::markTestSkipped('Directory permission semantics differ on Windows.');
+        }
+
         $targetDirectory = self::getTempPath() . '/not-writable';
 
         mkdir($targetDirectory, 0555);

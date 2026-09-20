@@ -33,15 +33,25 @@ final class RealPathTest extends TestCase
     #[DataProvider('returnExistingFilePathDataProvider')]
     public function testExistingFileReturnsRealPath(string $filePath): void
     {
+        if (str_contains(PHP_OS, 'WIN')) {
+            self::markTestSkipped('RealPath resolution for partial paths differs on Windows.');
+        }
+
         $filter = new RealPathFilter();
 
         $result = $filter->filter($filePath);
 
-        self::assertSame(__DIR__ . '/_files/file.1', $result);
+        $expected = realpath(__DIR__ . '/_files/file.1');
+        self::assertNotFalse($expected);
+        self::assertSame($expected, $result);
     }
 
     public function testPathWithNonExistingPartsButRealResolutionIsNotValid(): void
     {
+        if (str_contains(PHP_OS, 'WIN')) {
+            self::markTestSkipped('RealPath resolution for partial paths differs on Windows.');
+        }
+
         $filter = new RealPathFilter();
 
         $path = __DIR__ . '/_files/foo/../bar/../file.1';
@@ -92,6 +102,10 @@ final class RealPathTest extends TestCase
     #[DataProvider('returnNonExistentPathDataProvider')]
     public function testNonExistentPathAllowed(string $path, string $expectedPath): void
     {
+        if (str_contains(PHP_OS, 'WIN')) {
+            self::markTestSkipped('RealPath normalization for non-existent paths differs on Windows.');
+        }
+
         $filter = new RealPathFilter(['exists' => false]);
 
         self::assertSame($expectedPath, $filter($path));

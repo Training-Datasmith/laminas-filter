@@ -193,7 +193,7 @@ final readonly class RenameUpload implements FilterInterface
             $targetFilename = $this->randomizeFilename($targetFilename);
         }
 
-        return $targetDirectory . DIRECTORY_SEPARATOR . $targetFilename;
+        return str_replace('\\', '/', rtrim($targetDirectory, '/\\') . '/' . $targetFilename);
     }
 
     /**

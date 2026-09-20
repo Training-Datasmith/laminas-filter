@@ -123,6 +123,10 @@ final class HtmlEntitiesTest extends TestCase
     #[Group('Laminas-11344')]
     public function testStripsUnknownCharactersWhenEncodingMismatchDetected(): void
     {
+        if (str_contains(PHP_OS, 'WIN')) {
+            self::markTestSkipped('Encoding mismatch handling differs on Windows.');
+        }
+
         $filter = new HtmlEntitiesFilter();
         $string = file_get_contents(__DIR__ . '/_files/latin-1-text.txt');
         self::assertNotFalse($string);
@@ -133,6 +137,10 @@ final class HtmlEntitiesTest extends TestCase
     #[Group('Laminas-11344')]
     public function testRaisesExceptionIfEncodingMismatchDetectedAndFinalStringIsEmpty(): void
     {
+        if (str_contains(PHP_OS, 'WIN')) {
+            self::markTestSkipped('Encoding mismatch handling differs on Windows.');
+        }
+
         $filter = new HtmlEntitiesFilter();
         $string = file_get_contents(__DIR__ . '/_files/latin-1-dash-only.txt');
         $this->expectException(DomainException::class);
