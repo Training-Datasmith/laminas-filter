@@ -95,7 +95,7 @@ final class RealPathTest extends TestCase
             ['/nonexistent/absolute/extra///slashes', '/nonexistent/absolute/extra/slashes'],
             ['./nonexistent/relative/path', $cwd . '/nonexistent/relative/path'],
             ['./dropped/parts/../../path', $cwd . '/path'],
-            ['../relative/from/parent', dirname($cwd) . '/relative/from/parent'],
+            ['../relative/from/parent', rtrim(dirname($cwd), '/') . '/relative/from/parent'],
         ];
     }
 

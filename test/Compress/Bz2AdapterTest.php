@@ -74,6 +74,19 @@ final class Bz2AdapterTest extends TestCase
         $adapter->compress('Foo');
     }
 
+    #[RequiresPhp('>= 8.5.0')]
+    public function testInvalidCompressionLevelOn85(): void
+    {
+        /** @psalm-suppress InvalidArgument */
+        $adapter = new Bz2Adapter([
+            'blocksize' => 99,
+        ]);
+
+        $this->expectException(\ValueError::class);
+        $this->expectExceptionMessage('bzcompress(): Argument #2 ($block_size) must be between 1 and 9');
+        $adapter->compress('Foo');
+    }
+
     public function testDecompressingInvalidContent(): void
     {
         $adapter = new Bz2Adapter();

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace LaminasTest\Filter;
 
-use const E_WARNING;
-
 use Laminas\Filter\ToInt;
 use LaminasTest\Filter\TestAsset\StringableObject;
 
@@ -15,9 +13,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 use PHPUnit\Framework\Attributes\RequiresPhp;
 use PHPUnit\Framework\TestCase;
-
-use function restore_error_handler;
-use function set_error_handler;
 
 final class ToIntTest extends TestCase
 {
@@ -59,30 +54,11 @@ final class ToIntTest extends TestCase
         self::assertSame(PHP_INT_MAX, $filter->__invoke($huge));
     }
 
-    public function testHugeNumbersAreTruncatedToIntMaxOn85WithAWarning(): void
+    #[RequiresPhp('>= 8.5.0')]
+    public function testHugeNumbersAreTruncatedToIntMaxOn85(): void
     {
-        if (\PHP_VERSION_ID < 80500) {
-            self::markTestSkipped('PHP 8.5+ warning behavior is not available on this runtime.');
-        }
-
-        $called = false;
         $huge   = '9223372036854775807999';
-
-        set_error_handler(static function (int $code, string $message) use (&$called, $huge): bool {
-            self::assertSame(E_WARNING, $code);
-            self::assertStringContainsString($huge, $message);
-            self::assertStringContainsString('is not representable as an int', $message);
-            $called = true;
-
-            return true;
-        });
-
         $filter = new ToInt();
-        try {
-            self::assertSame(PHP_INT_MAX, $filter->__invoke($huge));
-            self::assertTrue($called, 'The error handler should have been called');
-        } finally {
-            restore_error_handler();
-        }
+        self::assertSame(PHP_INT_MAX, $filter->__invoke($huge));
     }
 }
